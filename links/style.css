@@ -1,66 +1,83 @@
+body {
+    display: flex;
+    justify-content: center;
+}
 #main-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: url('img/background.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80%;
 }
 #game-wrap {
+    background: url('img/floor.jpeg');
+    background-size: 2em;
+    background-repeat: repeat;
     display: flex;
     flex-direction: column;
+    margin-right: 500px;
 }
 .column {
     display: flex;
     flex-direction: row;
 }
 .walls {
-    background-color: black;
-    height: 40px;
-    width: 40px;
+    background: url('img/wall.jpeg');
+    background-size: cover;
+    height: 60px;
+    width: 60px;
 }
 .blank {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 40px;
+    height: 60px;
+    width: 60px;
 }
 .start {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
-    height: 40px;
-    width: 40px;
+    height: 60px;
+    width: 60px;
 }
 .box {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: green;
-    height: 40px;
-    width: 40px;
+    background: url('img/storage.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
 }
 .stored {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: purple;
-    height: 40px;
-    width: 40px;
+    background: url('img/stored.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
 }
 .storage {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: purple;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
+    background: url('img/garage.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
 }
 #character {
-    background-color: blue;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
+    background: url('img/man.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
 }
 #win {
     top: 50px;

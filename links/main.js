@@ -57,7 +57,7 @@ function addCell (piece,column,row) {
     } else if (piece === 'X') {
         let box = createBox(legend[piece])
         newCell.appendChild(box)
-        newCell.classList.add('storage')
+        newCell.classList.add('blank')
     } else {
         newCell.classList.add(legend[piece])
     }
@@ -127,9 +127,13 @@ function move (rowOffSet, columnOffSet) {
     else if(nextCellKey === 'B' && nextNextCellKey === 'O') {
         updateMap(' ','X')
         movePlayerBox('stored')
+        nextNextCell.classList.remove('storage')
+        nextNextCell.classList.add('blank')
     }else if (nextCellKey === 'X' && nextNextCellKey === ' ') {
         updateMap('O','B')
         movePlayerBox('box')
+        nextCell.classList.remove('blank')
+        nextCell.classList.add('storage')
     }
 
     // moves player and box
