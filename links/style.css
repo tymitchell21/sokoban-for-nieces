@@ -1,14 +1,12 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: bisque;
 }
 #main-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('img/background.jpeg');
-    background-size: contain;
-    background-repeat: no-repeat;
     width: 80%;
 }
 #game-wrap {
@@ -17,7 +15,6 @@ body {
     background-repeat: repeat;
     display: flex;
     flex-direction: column;
-    margin-right: 500px;
 }
 .column {
     display: flex;

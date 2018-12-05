@@ -68,6 +68,7 @@ function addCell (piece,column,row) {
 
     let columnDest = document.getElementById(column)
     columnDest.appendChild(newCell)
+    return newCell
 }
 
 // creates new column
@@ -114,8 +115,8 @@ function move (rowOffSet, columnOffSet) {
     const nextCellKey = map[nextRow][nextColumn]
     const nextNextCellKey = map[nextNextRow][nextNextColumn]
 
-    const nextCell = document.getElementById(`[${nextRow}][${nextColumn}]`)
-    const nextNextCell = document.getElementById(`[${nextNextRow}][${nextNextColumn}]`)
+    const nextCell = createMaze[nextRow][nextColumn]
+    const nextNextCell = createMaze[nextNextRow][nextNextColumn]
 
     if(nextCellKey === ' ' || nextCellKey === 'S' || nextCellKey === 'O'){
         nextCell.appendChild(character)
@@ -184,8 +185,8 @@ function youWon() {
 // builds maze when start button is clicked
 const createMaze = map.map ((x,column)=> {
         createColumn(column)
-        x.map ((z,row) => {
-            addCell(z,column,row)
+        return x.map ((z,row) => {
+            return addCell(z,column,row)
         })
 })
 
