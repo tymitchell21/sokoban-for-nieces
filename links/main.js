@@ -153,7 +153,7 @@ function move (rowOffSet, columnOffSet) {
     }
 
     winCheck()
-}
+}// hey
 
 // checks for a win
 function winCheck() {
