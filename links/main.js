@@ -12,6 +12,8 @@ const mapOriginal = [
 
 const map = mapOriginal.map(row => [...row]);
 
+console.log(map)
+
 const map2 = [  
     "    WWWWW          ",  
     "    W   W          ",  
@@ -72,10 +74,10 @@ function addCell (piece,column,row) {
 }
 
 // creates new column
-function createColumn (column) {
+function createRow (row) {
     let newCell = document.createElement('div')
-    newCell.id = column
-    newCell.className = 'column'
+    newCell.id = row
+    newCell.className = 'row'
     destination.appendChild(newCell)
 }
 
@@ -147,9 +149,9 @@ function move (rowOffSet, columnOffSet) {
     }
 
     // updates map array
-    function updateMap (value1, value2) {
-        map[characterRow+rowOffSet][characterColumn + columnOffSet] = value1
-        map[characterRow+(rowOffSet*2)][characterColumn + (columnOffSet*2)] = value2
+    function updateMap (valueOfNextCell, valueOfNextNextCell) {
+        map[nextRow][nextColumn] = valueOfNextCell
+        map[nextNextRow][nextNextColumn] = valueOfNextNextCell
     }
 
     winCheck()
@@ -183,11 +185,11 @@ function youWon() {
 }
 
 // builds maze when start button is clicked
-const createMaze = map.map ((x,column)=> {
-        createColumn(column)
-        return x.map ((z,row) => {
-            return addCell(z,column,row)
-        })
+const createMaze = map.map ((cellRow,row)=> {
+    createRow(row)
+    return cellRow.map ((cell,column) => {
+        return addCell(cell,row,column)
+    })
 })
 
 document.addEventListener('keydown', dir)
