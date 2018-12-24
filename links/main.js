@@ -187,7 +187,11 @@ function winCheck() {
             if (box === 'X') count++
         })
     })
-    if (count === winNumber) youWin()
+    if (count === winNumber) {
+        setTimeout(() => {
+            youWin()
+        }, 300)
+    }
 }
 
 // displays a win
@@ -196,10 +200,6 @@ function youWin() {
     const jesus = document.createElement('img')
     jesus.src = 'links/img/win.gif'
     destination.appendChild(jesus)
-
-    // setTimeout(() => {
-    //     location.reload()
-    // }, 3000)
 }
 
 document.addEventListener('keydown', dir)
