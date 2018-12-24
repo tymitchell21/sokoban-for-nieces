@@ -111,9 +111,9 @@ function createBox (className) {
 
 // calls directions
 function dir (event) {
+    event.preventDefault()
     if (!event.key.includes('Arrow')) return
     directions[event.key]();
-    event.preventDefault()
 }
 
 // makes moves
