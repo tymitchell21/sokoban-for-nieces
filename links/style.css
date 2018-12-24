@@ -86,3 +86,6 @@ body {
     height: 70px;
     width: 400px;
 }
+#start-button {
+    margin: 20px 0px;
+}

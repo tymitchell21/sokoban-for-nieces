@@ -1,34 +1,21 @@
-const mapOriginal = [  
-    "  WWWWW ",  
-    "WWW   W ",  
-    "WOSB  W ",  
-    "WWW BOW ",  
-    "WOWWB W ",  
-    "W W O WW",  
-    "WB XBBOW",  
-    "W   O  W",  
-    "WWWWWWWW"  
-]
+// const mapOriginal = [  
+//     "  WWWWW ",  
+//     "WWW   W ",  
+//     "WOSB  W ",  
+//     "WWW BOW ",  
+//     "WOWWB W ",  
+//     "W W O WW",  
+//     "WB XBBOW",  
+//     "W   O  W",  
+//     "WWWWWWWW"  
+// ]
 
-const map = mapOriginal.map(row => [...row]);
+// const map = mapOriginal.map(row => [...row]);
+const startButton = document.querySelector('#start-button')
+const mapSelector = document.querySelector('#map-selector')
+console.log(mapSelector.value)
 
-console.log(map)
-
-const map2 = [  
-    "    WWWWW          ",  
-    "    W   W          ",  
-    "    WB  W          ",  
-    "  WWW  BWW         ",  
-    "  W  B B W         ",  
-    "WWW W WW W   WWWWWW",  
-    "W   W WW WWWWW  OOW",  
-    "W B  B          OOW",  
-    "WWWWW WWW WSWW  OOW",  
-    "    W     WWWWWWWWW",  
-    "    WWWWWWW        "  
- ]
-
- const directions = {
+const directions = {
     ArrowUp: () => move(-1, +0),
     ArrowRight: () => move(+0, +1),
     ArrowDown: () => move(+1, +0),
@@ -45,6 +32,31 @@ const legend = {
 }
 
 const destination = document.querySelector('#game-wrap');
+let winNumber
+let finalMap = []
+let createMaze = []
+
+function startGame () {
+    destination.innerHTML = ''
+    const mapChoice = maps[mapSelector.value]
+    finalMap = mapChoice.map(row => [...row])
+
+    winNumber = 0
+    finalMap.map (x => {
+        x.map (y => {
+            if (y==='O' || y==='X') {
+                winNumber ++
+            }
+        })
+    })
+
+    createMaze = finalMap.map ((cellRow,row)=> {
+        createRow(row)
+        return cellRow.map ((cell,column) => {
+            return addCell(cell,row,column)
+        })
+    })
+}
 
 function addCell (piece,column,row) {
     let newCell = document.createElement('div')
@@ -75,10 +87,10 @@ function addCell (piece,column,row) {
 
 // creates new column
 function createRow (row) {
-    let newCell = document.createElement('div')
-    newCell.id = row
-    newCell.className = 'row'
-    destination.appendChild(newCell)
+    let newRow = document.createElement('div')
+    newRow.id = row
+    newRow.className = 'row'
+    destination.appendChild(newRow)
 }
 
 // creates the character
@@ -101,6 +113,7 @@ function createBox (className) {
 function dir (event) {
     if (!event.key.includes('Arrow')) return
     directions[event.key]();
+    event.preventDefault()
 }
 
 // makes moves
@@ -114,8 +127,8 @@ function move (rowOffSet, columnOffSet) {
     const nextNextRow = characterRow + (rowOffSet*2)
     const nextNextColumn = characterColumn + (columnOffSet*2)
 
-    const nextCellKey = map[nextRow][nextColumn]
-    const nextNextCellKey = map[nextNextRow][nextNextColumn]
+    const nextCellKey = finalMap[nextRow][nextColumn]
+    const nextNextCellKey = finalMap[nextNextRow][nextNextColumn]
 
     const nextCell = createMaze[nextRow][nextColumn]
     const nextNextCell = createMaze[nextNextRow][nextNextColumn]
@@ -132,11 +145,20 @@ function move (rowOffSet, columnOffSet) {
         movePlayerBox('stored')
         nextNextCell.classList.remove('storage')
         nextNextCell.classList.add('blank')
-    }else if (nextCellKey === 'X' && nextNextCellKey === ' ') {
+    }
+    else if (nextCellKey === 'X' && nextNextCellKey === ' ') {
         updateMap('O','B')
         movePlayerBox('box')
         nextCell.classList.remove('blank')
         nextCell.classList.add('storage')
+    }
+    else if (nextCellKey === 'X' && nextNextCellKey === 'O') {
+        updateMap('O','X')
+        movePlayerBox('stored')
+        nextCell.classList.remove('blank')
+        nextCell.classList.add('storage')
+        nextNextCell.classList.remove('storage')
+        nextNextCell.classList.add('blank')
     }
 
     // moves player and box
@@ -150,8 +172,8 @@ function move (rowOffSet, columnOffSet) {
 
     // updates map array
     function updateMap (valueOfNextCell, valueOfNextNextCell) {
-        map[nextRow][nextColumn] = valueOfNextCell
-        map[nextNextRow][nextNextColumn] = valueOfNextNextCell
+        finalMap[nextRow][nextColumn] = valueOfNextCell
+        finalMap[nextNextRow][nextNextColumn] = valueOfNextNextCell
     }
 
     winCheck()
@@ -160,12 +182,12 @@ function move (rowOffSet, columnOffSet) {
 // checks for a win
 function winCheck() {
     let count = 0;
-    map.map (row => {
+    finalMap.map (row => {
         row.map (box => {
             if (box === 'X') count++
         })
     })
-    if (count === 7) youWin()
+    if (count === winNumber) youWin()
 }
 
 // displays a win
@@ -174,22 +196,11 @@ function youWin() {
     const jesus = document.createElement('img')
     jesus.src = 'links/img/jesus.gif'
     destination.appendChild(jesus)
-}
 
-// runs youWon() function
-function youWon() {
-    win.style.display = 'block'
-    start.innerHTML = 'Try Again'
-    start.style.display = 'block'
-    document.removeEventListener('keydown', dir);
+    // setTimeout(() => {
+    //     location.reload()
+    // }, 3000)
 }
-
-// builds maze when start button is clicked
-const createMaze = map.map ((cellRow,row)=> {
-    createRow(row)
-    return cellRow.map ((cell,column) => {
-        return addCell(cell,row,column)
-    })
-})
 
 document.addEventListener('keydown', dir)
+startButton.addEventListener('click', startGame)
