@@ -1,16 +1,19 @@
 body {
     display: flex;
     justify-content: center;
-    background-color: bisque;
+    background: url("img/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 #main-wrap {
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80%;
 }
 #game-wrap {
-    background: url('img/floor.jpeg');
+    background: rgb(0,0,0,0.8);
     background-size: 2em;
     background-repeat: repeat;
     display: flex;
@@ -23,31 +26,32 @@ body {
 .walls {
     background: url('img/wall.jpeg');
     background-size: cover;
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
 }
 .blank {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
 }
 .start {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
 }
 .box {
     display: flex;
     align-items: center;
-    background: url('img/storage.png');
-    background-size: contain;
+    background: url('img/snitch.png');
+    background-size: 50%;
+    background-position: center center;
     background-repeat: no-repeat;
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
 }
 .stored {
     display: flex;
@@ -56,25 +60,25 @@ body {
     background: url('img/stored.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
 }
 .storage {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('img/garage.png');
+    background: url('https://i230.photobucket.com/albums/ee98/robert_flagg/QQS%20new/quidditchsetcopy.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
 }
 #character {
-    background: url('img/man.png');
+    background: url('img/harrypotter.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
 }
 #win {
     top: 50px;

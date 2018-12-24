@@ -194,7 +194,7 @@ function winCheck() {
 function youWin() {
     destination.innerHTML = ''
     const jesus = document.createElement('img')
-    jesus.src = 'links/img/jesus.gif'
+    jesus.src = 'links/img/win.gif'
     destination.appendChild(jesus)
 
     // setTimeout(() => {
